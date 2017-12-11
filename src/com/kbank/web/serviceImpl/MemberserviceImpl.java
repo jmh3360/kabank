@@ -1,31 +1,40 @@
 package com.kbank.web.serviceImpl;
 
 import java.util.Scanner;
+import java.util.Vector;
 
 import com.kabank.web.service.MemberService;
 import com.kbank.web.bean.MemberBean;
 
 public  class MemberserviceImpl implements MemberService {
-	private MemberBean[] members;  // memberbean array는 MemberBean의 요소들의 내용을 닮고 있기에 더 큰 개념이라
+	private Vector<MemberBean> members;  // memberbean array는 MemberBean의 요소들의 내용을 닮고 있기에 더 큰 개념이라
+	
 	//생각 할 수 있다. 예 이름,나이,주민번호,계좌 등을 하나의 공간에 담을 수 있음.
-	private int count ;
 	
 
 	
-	public MemberserviceImpl(int count) {
-		this.count = 0; //실행될때 한번만 초기화 되게끔 MemberserviceImpl = while 밖에 있어 한번만 실행
-		members = new MemberBean[count];
-	}
-	@Override
-	public int count() {
-		return this.count;
+	public MemberserviceImpl() {
+		members = new Vector<MemberBean>(10,10);
+		//this.count = 0; //실행될때 한번만 초기화 되게끔 MemberserviceImpl = while 밖에 있어 한번만 실행
 	}
 		@Override
 	public void addMember(MemberBean member) {
-		members[count] = member;
-		count++;
+			members.add(member);
 		
 	}
+		@Override
+		public Vector<MemberBean> list() {
+			return members;
+		}
+		@Override
+		public int count() {
+			return members.size();
+		}
+		@Override
+		public void totalDel() {
+				members.clear();
+			}
+		
 	@Override
 	public String findGender(String ssn) {
 		String foo = "";
@@ -58,8 +67,24 @@ public  class MemberserviceImpl implements MemberService {
 			return myage;
 				 }
 	@Override
-	public MemberBean[] list() {
-		return members;
+	public void delete(String id) {
+		for(int i = 0; i < members.size(); i++) {
+			members.get(i).getId().equals(id);
+			members.remove(i);
+			}
+		
+	}
+	@Override
+	public String login(String id, String pass) {
+		String res = "";
+		for(int i = 0; i < members.size(); i++) {
+			if(members.get(i).getId().equals(id)&&members.get(i).getId().equals(pass)) {
+				res = String.format("[이름]%s [주민번호]%s [나이]%s [id]%s [pass]%s", members.get(i).getName()
+						,members.get(i).getSsn(), members.get(i).getAge(), members.get(i).getId(),members.get(i).getPass());
+						}
+			}
+		
+		return null;
 	}
 		}
 	

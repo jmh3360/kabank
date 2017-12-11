@@ -1,49 +1,55 @@
 package com.kbank.web.bean;
 
 public class MemberBean {
-	private int customNum; // customNum은 멤버변수
-	private String name;
-	private int age;
-	private String gender;
-	private String ssn;
-
-	public void setCustomNum(int customnum) {
-		this.customNum = customnum;
-	}
-
+	private int customNum, age; // customNum은 멤버변수
+	private String name, gender, ssn, id, pass;
 	public int getCustomNum() {
-		return this.customNum;
+		return customNum;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setCustomNum(int customNum) {
+		this.customNum = customNum;
 	}
-
-	public String getName() {
-		return this.name;
+	public int getAge() {
+		return age;
 	}
-
 	public void setAge(int age) {
 		this.age = age;
 	}
-
-	public int getAge() {
-		return this.age;
+	public String getName() {
+		return name;
 	}
-
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getGender() {
+		return gender;
+	}
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-
-	public String getGender() {
-		return this.gender;
+	public String getSsn() {
+		return ssn;
 	}
-
 	public void setSsn(String ssn) {
 		this.ssn = ssn;
 	}
-
-	public String getSsn() {
-		return this.ssn;
+	public String getId() {
+		return id;
 	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getPass() {
+		return pass;
+	}
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+	@Override
+	public String toString() {
+		return "회원 [고객번호=" + customNum + ", 나이=" + age + ", 이름=" + name + ", 성별=" + gender
+				+ ", 주민=" + ssn + ", 아이디=" + id + ", 비밀번호=" + pass + "]\n";
+	}
+	
+	
 }
