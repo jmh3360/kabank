@@ -12,5 +12,11 @@ public interface MemberService {
 	public int count();
 	public void totalDel();
 	public void delete(String id);
-	public String login(String id, String pass);
+	//public String login(String id, String pass);
+	public String login(MemberBean member);
+	public MemberBean findById(String string);
+	public int createCustomNum();
+	public void updatePassword(String pass);
+	public void deleteMyId();
+	public Vector <MemberBean> findByName(String string);
 }

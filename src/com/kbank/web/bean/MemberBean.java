@@ -3,6 +3,7 @@ package com.kbank.web.bean;
 public class MemberBean {
 	private int customNum, age; // customNum은 멤버변수
 	private String name, gender, ssn, id, pass;
+	
 	public int getCustomNum() {
 		return customNum;
 	}

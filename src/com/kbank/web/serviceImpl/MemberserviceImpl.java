@@ -8,17 +8,26 @@ import com.kbank.web.bean.MemberBean;
 
 public  class MemberserviceImpl implements MemberService {
 	private Vector<MemberBean> members;  // memberbean array는 MemberBean의 요소들의 내용을 닮고 있기에 더 큰 개념이라
+	MemberBean bean;
+	private int customNum;
 	
 	//생각 할 수 있다. 예 이름,나이,주민번호,계좌 등을 하나의 공간에 담을 수 있음.
-	
 
 	
 	public MemberserviceImpl() {
 		members = new Vector<MemberBean>(10,10);
+		customNum = 1000;
+		bean = new MemberBean();
 		//this.count = 0; //실행될때 한번만 초기화 되게끔 MemberserviceImpl = while 밖에 있어 한번만 실행
+	}
+	
+	public int createCustomNum() {
+		
+		return customNum++;
 	}
 		@Override
 	public void addMember(MemberBean member) {
+			
 			members.add(member);
 		
 	}
@@ -74,9 +83,9 @@ public  class MemberserviceImpl implements MemberService {
 			}
 		
 	}
-	@Override
+	/*@Override
 	public String login(String id, String pass) {
-		String res = "";
+		String res = "";//literal값을 주게 되면 비밀번호가 공개된다.
 		for(int i = 0; i < members.size(); i++) {
 			if(members.get(i).getId().equals(id)&&members.get(i).getId().equals(pass)) {
 				res = String.format("[이름]%s [주민번호]%s [나이]%s [id]%s [pass]%s", members.get(i).getName()
@@ -84,9 +93,94 @@ public  class MemberserviceImpl implements MemberService {
 						}
 			}
 		
-		return null;
+		return res;
 	}
+	*/
+	@Override
+	public String login(MemberBean member) {
+		String res = "";
+		for(int i = 0; i < members.size(); i++) {
+			
+			if(member.getId().equals(members.get(i).getId())) {
+				if(member.getPass().equals(members.get(i).getPass())) {
+					res =String.format("로그인 성공"+"[이름]%s [주민번호]%s [나이]%s [id]%s [pass]%s",  members.get(i).getName()
+							,members.get(i).getSsn(), members.get(i).getAge(), members.get(i).getId(),members.get(i).getPass());
+					bean = members.get(i);
+				}else {
+					res="비밀번호가 틀렸습니다.";
+				}
+				
+			}else {
+				res = "ID가 존재하지 않습니다.";
+			}
 		}
+		return res;
+	}
+		
+		/*String res = "";
+		for(int i = 0; i < members.size(); i++) {
+			res = (member.getId().equals(members.get(i).getId())&&member.getPass().equals(members.get(i).getPass())) ? 
+					"로그인 성공" : (member.getId().equals(members.get(i).getId()) ? "비밀번호가 틀립니다." : "id가 다릅니다.") ;
+		}
+		return res;
+		
+	}
+	
+	*/
+		/*
+	Stirng res = "아이디 없음";
+		for(int i = 0;i<members.size();i++) {
+			res = (member.getPass().equals(members.get(i).getPass()))?
+					"로그인 성공" : "비번 틀림";
+			return res;
+		}
+	return res;
+	
+			}
+				
+				
+			}*/
+		
+	@Override
+	public MemberBean findById(String string) {
+		for(int i = 0;i <members.size(); i++) {
+			string.equals(members.get(i).getId());
+			return bean = members.get(i);
+		}
+		return bean;
+	}
+
+	@Override
+	public void updatePassword(String pass) {
+		bean.setPass(pass);
+		
+		}
+
+	@Override
+	public void deleteMyId() {
+		String res = "";
+		for(int i = 0; i < members.size(); i++) {
+	//		res = (bean.getId().equals(members.get(i))&&bean.getPass().equals(members.get(i).getPass())) ? 
+			//		members.remove(i) : "" ;
+		}
+		
+	}
+
+	@Override
+	public Vector<MemberBean> findByName(String string) {
+		Vector<MemberBean> res = new Vector<>();
+		for(int i = 0 ; i < members.size(); i++) {
+			if(string.equals(members.get(i).getName())) {
+				res.add(members.get(i));
+			}
+		}
+		return res;
+	}
+	
+	}
+	
+
+
 	
 
 	
